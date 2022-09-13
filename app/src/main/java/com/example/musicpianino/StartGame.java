@@ -25,21 +25,39 @@ public class StartGame extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnstart.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(StartGame.this);
+                builder.setTitle("Thông báo");
+                builder.setMessage("Bạn có muốn thoát không?");
+                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                builder.show();
+                return false;
+            }
+        });
 
     }
     @Override
     public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setTitle("chiqish")
-                //.setIcon(R.drawable.ic_launcher_background)
-                .setMessage("dasturdan chiqmoqchimisiz")
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                })
-                .setNegativeButton(android.R.string.no, null)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
+        //alert dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Exit");
+        builder.setMessage("Are you sure you want to exit?");
+        builder.setPositiveButton("Yes", (dialogInterface, i) -> finish());
+        builder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
+        builder.show();
+
     }
 }
